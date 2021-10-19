@@ -1,0 +1,36 @@
+function verifyCookie(){
+	if(getCookie('cookie-agreement') == ""){
+		document.querySelector('alert').style.display = "block";
+		closeCookie();
+	}
+}
+
+function setCookie(){
+	var d = new Date('2099-03-21');
+	var expires = "expires="+ d.toUTCString();
+	document.cookie = 'cookie-agreement' + "=" + 'true' + ";" + expires + ";path=/";
+	document.querySelector('alert').remove();
+}
+
+
+
+function getCookie(cname) {
+  var name = cname + "=";
+  var decodedCookie = decodeURIComponent(document.cookie);
+  var ca = decodedCookie.split(';');
+  for(var i = 0; i <ca.length; i++) {
+    var c = ca[i];
+    while (c.charAt(0) == ' ') {
+      c = c.substring(1);
+    }
+    if (c.indexOf(name) == 0) {
+      return c.substring(name.length, c.length);
+    }
+  }
+  return "";
+}
+
+
+function closeCookie(){
+	document.querySelector('alert').addEventListener("click", function(){document.querySelector('alert').remove()});
+}
